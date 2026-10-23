@@ -8,20 +8,39 @@ function render (html) {
 -------------------------------- */
 let clickCount = 0
 
+document.getElementById('btnClick').addEventListener('click', () => {
+   clickCount++
+
+   render(
+      `<p>You clicked my button! Button clicked ${clickCount} time${clickCount === 1 ? '': 's'}.</p>`
+   )
+}) 
+
 
 /* --------------------------------------
    Demo 2: Double-click (toggle highlight)
 --------------------------------------- */
+
+const dblCard = document.getElementById('dblCard') // select the card element
+
+dblCard.addEventListener('dblclick', () => {
+   dblCard.classList.toggle('activated') // toggle the highlight class
+   const state = dblCard.classList.contains('activated') ? 'ON' : 'OFF'
+   render(`<p>The highlight is ${state}.</p>`)
+})
 
 
 /* --------------------------------
    Demo 3: Keypress (show key/code)
 --------------------------------- */
 
+const kbKey = document.getElementById('kbKey') // select the key display element
+const kbCode = document.getElementById('kbCode') // select the code display element
 
-/* ----------------------------------------
-   Demo 4: Show Time (12-hour format + day)
------------------------------------------ */
+document.addEventListener('keydown', e => {
+   kbKey.textContent = e.key === ' ' ? '(space)' : e.key
+   kbCode.textContent = e.code
+})
 
 
 /* -------------------------
@@ -39,6 +58,7 @@ document.getElementById('btnClear').addEventListener('click', () => {
    - Add event listeners for mouseenter and mouseleave on the card
    - On mouseenter: add a highlight class, increase the counter, and show the count in #out
    - On mouseleave: remove the highlight class and show a message in #out
+   
 
    Option B — Scroll Progress Bar
    - Add a small Bootstrap progress bar element at the very top of the page
@@ -55,3 +75,20 @@ document.getElementById('btnClear').addEventListener('click', () => {
    - On focus: add a border/shadow class to the input
    - On blur: remove those classes and make sure #out shows the right message
 ================================================== */
+
+
+let hoverCount = 0;
+
+dblCard.addEventListener('mouseenter', () => {
+    hoverCount++;
+
+    dblCard.classList.add('activated');
+
+    render(`<p>You hovered over the card ${hoverCount} time${hoverCount === 1 ? '' : 's'}!</p>`);
+});
+
+dblCard.addEventListener('mouseleave', () => {
+    dblCard.classList.remove('activated');
+
+    render('<p>You have stopped hovering over the card!</p>');
+});
