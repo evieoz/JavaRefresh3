@@ -77,18 +77,10 @@ document.getElementById('btnClear').addEventListener('click', () => {
 ================================================== */
 
 
-let hoverCount = 0;
+// option A
 
-dblCard.addEventListener('mouseenter', () => {
-    hoverCount++;
+let hoverCount = 0
 
-    dblCard.classList.add('activated');
+const hoverCard = document.getElementById('hoverCard')
 
-    render(`<p>You hovered over the card ${hoverCount} time${hoverCount === 1 ? '' : 's'}!</p>`);
-});
 
-dblCard.addEventListener('mouseleave', () => {
-    dblCard.classList.remove('activated');
-
-    render('<p>You have stopped hovering over the card!</p>');
-});
